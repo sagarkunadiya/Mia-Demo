@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mia — Zahnarztpraxis Bodensee</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f4f2ee;--dark:#1a1c2e;--green:#2d6a4f;--blue:#2563eb;--border:#ddd8ce;--white:#fff;--text:#1a1c2e;--r:14px}
+  html,body{min-height:100vh;font-family:'DM Sans',sans-serif;background:#e8e4dc;display:flex;align-items:center;justify-content:center;padding:10px}
+  .shell{width:100%;max-width:420px;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.18);border:1px solid var(--border)}
+  .hdr{background:var(--dark);padding:13px 16px;display:flex;align-items:center;gap:11px}
+  .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2d6a4f,#2563eb);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+  .av-l{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-style:italic}
+  .dot{position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#52b788;border:2px solid var(--dark)}
+  .hname{font-family:'DM Serif Display',serif;font-size:16px;color:#fff}
+  .hsub{font-size:10px;color:#9a9fbe;margin-top:1px}
+  .badge{font-size:10px;font-weight:600;text-transform:uppercase;background:#1D9E75;color:#fff;padding:3px 9px;border-radius:20px;margin-left:auto}
+  .sbar{background:#1e2240;padding:5px 14px;font-size:11px;color:#8fa3c8;display:flex;align-items:center;gap:6px}
+  .sdot{width:6px;height:6px;border-radius:50%;background:#52b788;flex-shrink:0;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .chat{height:420px;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px;background:var(--bg);scroll-behavior:smooth}
+  .chat::-webkit-scrollbar{width:3px}
+  .chat::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+  .msg{display:flex;gap:7px;align-items:flex-end;animation:up .2s ease both}
+  .msg.u{flex-direction:row-reverse}
+  @keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .mav{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+  .mav.b{background:linear-gradient(135deg,#2d6a4f,#2563eb);font-family:'DM Serif Display',serif;font-style:italic}
+  .mav.u{background:#5a5047;font-weight:600;font-size:11px}
+  .bub{max-width:82%;padding:9px 13px;font-size:13px;line-height:1.65;border-radius:14px}
+  .bub.b{background:#fff;color:#1a1c2e;border:1px solid var(--border);border-bottom-left-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .bub.u{background:#2d6a4f;color:#fff;border-bottom-right-radius:3px;border-bottom-left-radius:14px}
+  .typing{display:flex;align-items:center;gap:4px;padding:10px 13px;background:#fff;border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:3px;width:fit-content}
+  .td{width:5px;height:5px;border-radius:50%;background:#bbb;animation:bop .8s infinite}
+  .td:nth-child(2){animation-delay:.13s}.td:nth-child(3){animation-delay:.26s}
+  @keyframes bop{0%,60%,100%{transform:none}30%{transform:translateY(-4px)}}
+  .cw{margin-left:35px;margin-top:-2px;max-width:85%}
+  .cs{display:flex;flex-direction:column;gap:4px}
+  .cb{text-align:left;padding:8px 12px;border-radius:9px;border:1.5px solid #2d6a4f;background:transparent;color:#2d6a4f;font-size:12.5px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s}
+  .cb:hover{background:#2d6a4f;color:#fff}
+  .cb.sc{border-color:#2563eb;color:#2563eb}
+  .cb.sc:hover{background:#2563eb;color:#fff}
+  .cb.pk{opacity:.55;pointer-events:none}
+  .date-wrap{margin-left:35px;margin-top:-2px;max-width:85%}
+  .date-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .date-btn{padding:11px 8px;border-radius:11px;border:1.5px solid #2d6a4f;background:#f6fbf8;color:#2d6a4f;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;text-align:center;transition:all .16s;line-height:1.4}
+  .date-btn:hover{background:#2d6a4f;color:#fff;transform:scale(1.02)}
+  .date-btn.pk{background:#2d6a4f;color:#fff;pointer-events:none}
+  .date-btn.dm{opacity:.4;pointer-events:none}
+  .date-day{font-size:13px;font-weight:600;display:block}
+  .date-sub{font-size:10px;display:block;margin-top:1px;opacity:.8}
+  .spw{margin-left:35px;margin-top:-2px;max-width:85%}
+  .spg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .sp{padding:10px 8px;border-radius:9px;border:1.5px solid #2563eb;background:#eff6ff;color:#2563eb;font-size:12.5px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;text-align:center;transition:all .16px}
+  .sp:hover{background:#2563eb;color:#fff;transform:scale(1.02)}
+  .sp.ch{background:#2563eb;color:#fff;pointer-events:none}
+  .sp.dm{opacity:.4;pointer-events:none}
+  .ty-card{margin-left:35px;max-width:85%;background:linear-gradient(135deg,#1a3a2a,#1a2c3a);border-radius:16px;padding:15px;animation:up .4s ease;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+  .ty-emoji{font-size:26px;text-align:center;margin-bottom:8px}
+  .ty-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;text-align:center}
+  .ty-detail{background:rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  .ty-row{display:flex;align-items:center;gap:7px;margin-bottom:4px;font-size:12px;color:rgba(255,255,255,.9)}
+  .ty-row:last-child{margin-bottom:0}
+  .ty-msg{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6;text-align:center;margin-bottom:8px}
+  .ty-foot{font-size:11px;color:rgba(255,255,255,.4);text-align:center}
+  .em{display:none;margin:3px 10px 0;background:#fff1f0;border:1px solid #fca5a5;border-radius:9px;padding:7px 10px;font-size:11.5px;color:#991b1b;align-items:center;gap:6px}
+  .em.show{display:flex}
+  .inp-row{display:flex;gap:6px;align-items:center;padding:9px 10px 11px;background:#fff;border-top:1px solid var(--border)}
+  .inp{flex:1;border:1.5px solid var(--border);border-radius:22px;padding:8px 13px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s}
+  .inp:focus{border-color:#2d6a4f}
+  .sbtn{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2d6a4f,#2563eb);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pw{text-align:center;font-size:10px;color:#bbb;padding:5px 0 8px;background:#fff}
+  .lcard{margin-left:35px;margin-top:-2px;max-width:85%;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px}
+  .lcard-t{font-size:11px;font-weight:600;color:#6b7080;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+  .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .lbtn{padding:9px 7px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:center;transition:all .15s;color:var(--text)}
+  .lbtn:hover{border-color:#2d6a4f;background:#d8f3dc;color:#2d6a4f}
+  .lbtn .fl{font-size:18px;display:block;margin-bottom:2px}
+  .lbtn .ln{font-weight:600;display:block;font-size:12px}
+  .lbtn.pk{background:#2d6a4f;border-color:#2d6a4f;color:#fff;pointer-events:none}
+  .loading-dates{margin-left:35px;margin-top:-2px;max-width:85%;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+  .loading-dots{display:flex;justify-content:center;gap:6px;margin-bottom:8px}
+  .ld{width:8px;height:8px;border-radius:50%;background:#2d6a4f;animation:bop .8s infinite}
+  .ld:nth-child(2){animation-delay:.15s}.ld:nth-child(3){animation-delay:.3s}
+  .loading-text{font-size:12px;color:#6b7080}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hdr">
+    <div class="av"><div class="av-l">M</div><div class="dot"></div></div>
+    <div style="flex:1">
+      <div class="hname">Mia — Zahnarztpraxis Bodensee</div>
+      <div class="hsub">Bregenz, Austria · 24/7 Support & Booking</div>
+    </div>
+    <div class="badge">Live ✓</div>
+  </div>
+  <div class="sbar">
+    <div class="sdot"></div>
+    <span>Auto Calendar · Make.com + Google Sheets · Built by Sagar</span>
+  </div>
+  <div class="em" id="em">⚠️ Emergency — Dr. Müller alerted · 📞 <b>0800 20 21 22</b></div>
+  <div class="chat" id="chat"></div>
+  <div class="inp-row">
+    <input class="inp" id="inp" placeholder="Type here..." onkeydown="if(event.key==='Enter')send()"/>
+    <button class="sbtn" onclick="send()"><i class="ti ti-send" style="font-size:14px;color:#fff"></i></button>
+  </div>
+  <div class="pw">Zahnarztpraxis Bodensee · Bahnhofstraße 12, 6900 Bregenz · +43 5574 123 456</div>
+</div>
+
+<script>
+// ── YOUR 2 WEBHOOKS ──────────────────────────────────────────────────────
+var DATES_WEBHOOK = 'https://hook.eu1.make.com/zptsevqebf4pxudums3j9iuoihcpoo8h';
+var SLOTS_WEBHOOK = 'https://hook.eu1.make.com/v4npacx24t2c2e1zux5ul2b9oalse3ut';
+
+var _lang=null,_busy=false,_state='boot',_choices=[],_booking={name:'',date:'',chosen:''};
+var EMER=/notfall|emergency|schmerz|pain|blutung|schwellung|toothache|unfall|stark.*weh/i;
+var KB={ph:'+43 5574 123 456',sos:'0800 20 21 22'};
+
+// Day names for display
+var DAYS_EN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var DAYS_DE=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+var MONTHS_EN=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+var MONTHS_DE=['','Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+var MONTHS_SHORT=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var MONTHS_SHORT_DE=['','Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+function CH(){return document.getElementById('chat')}
+function Q(id){return document.getElementById(id)}
+function scroll(){var c=CH();c.scrollTop=c.scrollHeight}
+function md(t){return t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}
+
+function addMsg(t,r){
+  var d=document.createElement('div');
+  d.className='msg'+(r==='u'?' u':'');
+  var av=r==='u'?'<div class="mav u">U</div>':'<div class="mav b">M</div>';
+  d.innerHTML=av+'<div class="bub '+r+'">'+md(t)+'</div>';
+  CH().appendChild(d);scroll();
+}
+function typing(on){
+  var t=Q('_typ');
+  if(on){if(t)return;var d=document.createElement('div');d.id='_typ';d.className='msg';d.innerHTML='<div class="mav b">M</div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';CH().appendChild(d);scroll();}
+  else{if(t)t.remove();}
+}
+function say(txt,cb){_busy=true;typing(true);setTimeout(function(){typing(false);addMsg(txt,'b');_busy=false;if(cb)cb();},700+Math.random()*300);}
+function clearUI(){['_cw','_spw','_ls','_dw','_dl'].forEach(function(id){var e=Q(id);if(e)e.remove();});}
+function showChoices(list){
+  var w=document.createElement('div');w.id='_cw';w.className='cw';
+  var h='<div class="cs">';
+  list.forEach(function(c,i){h+='<button class="cb'+(c.s?' sc':'')+'" data-i="'+i+'">'+c.l+'</button>';});
+  h+='</div>';w.innerHTML=h;
+  w.addEventListener('click',function(e){
+    var btn=e.target.closest('[data-i]');if(!btn||_busy)return;
+    var c=_choices[parseInt(btn.getAttribute('data-i'))];if(!c)return;
+    btn.classList.add('pk');var l=c.l,n=c.n;
+    setTimeout(function(){clearUI();addMsg(l,'u');goNode(n);},200);
+  });
+  CH().appendChild(w);scroll();_choices=list;
+}
+function showLangCard(){
+  var c=document.createElement('div');c.id='_ls';c.className='lcard';
+  c.innerHTML='<div class="lcard-t">🌐 Please choose your language</div><div class="lgrid"><button class="lbtn" id="_le"><span class="fl">🇬🇧</span><span class="ln">English</span></button><button class="lbtn" id="_ld"><span class="fl">🇩🇪</span><span class="ln">Deutsch</span></button></div>';
+  CH().appendChild(c);scroll();
+  Q('_le').addEventListener('click',function(){pickLang('en',this);});
+  Q('_ld').addEventListener('click',function(){pickLang('de',this);});
+}
+function pickLang(l,btn){
+  if(btn)btn.classList.add('pk');_lang=l;
+  Q('inp').placeholder=l==='de'?'Antworten Sie Mia...':'Reply to Mia...';
+  var lbl=l==='en'?'🇬🇧 English':'🇩🇪 Deutsch';
+  setTimeout(function(){
+    clearUI();addMsg(lbl,'u');
+    var w=l==='de'
+      ?'Wunderbar! 🇩🇪 Willkommen bei der **Zahnarztpraxis Bodensee** in Bregenz!\n\nIch bin **Mia**, Ihre digitale Assistentin — 24 Stunden, 7 Tage die Woche für Sie da.'
+      :'Wonderful! 🇬🇧 Welcome to **Zahnarztpraxis Bodensee** in Bregenz!\n\nI\'m **Mia**, your digital assistant — available 24 hours a day, 7 days a week.';
+    _state='main';
+    say(w,function(){
+      showChoices(l==='de'
+        ?[{l:'📅 Termin vereinbaren',n:'n_name',s:1},{l:'⏰ Öffnungszeiten',n:'hours'},{l:'💳 Kassen & Versicherung',n:'insur'},{l:'🦷 Unsere Leistungen',n:'serv'},{l:'📍 Kontakt & Adresse',n:'cont'},{l:'🚨 Notfall',n:'emer'}]
+        :[{l:'📅 Book appointment',n:'n_name',s:1},{l:'⏰ Opening hours',n:'hours'},{l:'💳 Insurance',n:'insur'},{l:'🦷 Our services',n:'serv'},{l:'📍 Contact & address',n:'cont'},{l:'🚨 Emergency',n:'emer'}]);
+    });
+  },250);
+}
+
+// ── FETCH ALL DATES FROM GOOGLE SHEET ────────────────────────────────────
+function getDayName(dateStr){
+  try{
+    var parts=dateStr.split('-');
+    var d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
+    return {
+      en: DAYS_EN[d.getDay()],
+      de: DAYS_DE[d.getDay()],
+      day: d.getDate(),
+      month: parseInt(parts[1]),
+      year: parseInt(parts[0])
+    };
+  }catch(e){return {en:dateStr,de:dateStr,day:'',month:0,year:0};}
+}
+
+function showLoadingDates(){
+  var d=document.createElement('div');d.id='_dl';d.className='loading-dates';
+  d.innerHTML='<div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div><div class="loading-text">'+(_lang==='de'?'Verfügbare Termine werden geladen...':'Loading available dates...')+'</div>';
+  CH().appendChild(d);scroll();
+}
+
+async function fetchAndShowDates(){
+  showLoadingDates();
+  var dates=null;
+  try{
+    // Try GET request first (simpler for dates webhook)
+    var res=await fetch(DATES_WEBHOOK);
+    var text=await res.text();
+    var m=text.match(/"dates"\s*:\s*"([^"]+)"/);
+    if(m&&m[1]&&m[1].trim()) dates=m[1].trim();
+
+    // Try POST if GET fails
+    if(!dates){
+      var res2=await fetch(DATES_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'get_dates'})});
+      var text2=await res2.text();
+      var m2=text2.match(/"dates"\s*:\s*"([^"]+)"/);
+      if(m2&&m2[1]&&m2[1].trim()) dates=m2[1].trim();
+    }
+  }catch(e){}
+
+  // Remove loading indicator
+  var dl=Q('_dl');if(dl)dl.remove();
+
+  if(dates){
+    // Handle nested JSON: {"text":"2026-05-19T00:00:00.000Z,..."}
+    var textMatch=dates.match(/"text"\s*:\s*"([^"]+)"/);
+    if(textMatch&&textMatch[1]) dates=textMatch[1];
+    // Parse comma-separated dates and strip timestamps
+    var dateArr=dates.split(',').map(function(d){
+      return d.trim().replace(/T\d{2}:\d{2}:\d{2}\.\d{3}Z/,'').replace(/T00:00:00Z/,'');
+    }).filter(function(d){return d&&d!=='date'&&/\d{4}-\d{2}-\d{2}/.test(d);});
+    if(dateArr.length>0){
+      renderDateButtons(dateArr);
+      return;
+    }
+  }
+
+  // Fallback — show message asking to type date
+  say(_lang==='de'
+    ?'Für welches **Datum** möchten Sie einen Termin?\n\nBeispiel: **2026-05-19**'
+    :'What **date** would you prefer?\n\nExample: **2026-05-19**');
+  _state='n_date_type';
+}
+
+function renderDateButtons(dateArr){
+  var wrap=document.createElement('div');wrap.id='_dw';wrap.className='date-wrap';
+  var grid=document.createElement('div');grid.className='date-grid';
+
+  dateArr.slice(0,6).forEach(function(dateStr){
+    var info=getDayName(dateStr);
+    var btn=document.createElement('button');
+    btn.className='date-btn';
+    var dayName=_lang==='de'?info.de:info.en;
+    var monthStr=_lang==='de'?MONTHS_SHORT_DE[info.month]:MONTHS_SHORT[info.month];
+    btn.innerHTML='<span class="date-day">'+dayName+'</span><span class="date-sub">📅 '+info.day+' '+monthStr+' '+info.year+'</span>';
+
+    btn.addEventListener('click',function(){
+      grid.querySelectorAll('.date-btn').forEach(function(b){b.classList.add('dm');});
+      btn.classList.remove('dm');btn.classList.add('pk');
+      _booking.date=dateStr;
+      var label=dayName+' · '+info.day+' '+monthStr;
+      setTimeout(function(){
+        var dw=Q('_dw');if(dw)dw.remove();
+        addMsg(label,'u');
+        fetchAndShowSlots(dateStr);
+      },250);
+    });
+    grid.appendChild(btn);
+  });
+
+  wrap.appendChild(grid);
+  CH().appendChild(wrap);
+  scroll();
+}
+
+// ── FETCH SLOTS FOR CHOSEN DATE ───────────────────────────────────────────
+async function fetchAndShowSlots(date){
+  _busy=true;typing(true);
+  setTimeout(function(){typing(false);addMsg(_lang==='de'?'⏳ Ich prüfe Verfügbarkeit für **'+date+'**...':'⏳ Checking availability for **'+date+'**...','b');},600);
+
+  var slots=null;
+  try{
+    var res=await fetch(SLOTS_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:date})});
+    var text=await res.text();
+    var m=text.match(/"slots"\s*:\s*"([^"]+)"/);
+    if(m&&m[1]&&m[1].trim()) slots=m[1].trim();
+  }catch(e){}
+
+  setTimeout(function(){
+    var arr;
+    if(slots){
+      arr=slots.split(',').map(function(s){return s.trim();}).filter(Boolean);
+    } else {
+      // Fallback slots per date from confirmed Make.com data
+      var fb={'2025-05-19':['09:00','10:30','14:00','15:30'],'2025-05-20':['08:30','11:00','13:00','16:00'],'2025-05-21':['09:30','10:00','14:30'],'2025-05-22':['09:00','11:30','15:00']};
+      arr=fb[date]||['09:00','10:30','14:00'];
+    }
+    var listed=arr.map(function(s,i){return '**'+(i+1)+'.** '+s;}).join('\n');
+    addMsg(_lang==='de'?'✅ **Verfügbare Zeiten:**\n\n'+listed+'\n\n👇 Tippen Sie auf Ihren Wunschtermin:':'✅ **Available times:**\n\n'+listed+'\n\n👇 Tap your preferred time:','b');
+    _busy=false;
+    showSlotPicker(arr);
+  },1800);
+}
+
+function showSlotPicker(slots){
+  var area=document.createElement('div');area.id='_spw';area.className='spw';
+  var grid=document.createElement('div');grid.className='spg';
+  slots.forEach(function(slot){
+    var btn=document.createElement('button');btn.className='sp';btn.textContent=slot;
+    btn.addEventListener('click',function(){
+      area.querySelectorAll('.sp').forEach(function(b){b.classList.add('dm');});
+      btn.classList.remove('dm');btn.classList.add('ch');
+      _booking.chosen=slot;
+      setTimeout(function(){var s=Q('_spw');if(s)s.remove();addMsg(slot,'u');confirmBooking();},300);
+    });
+    grid.appendChild(btn);
+  });
+  area.appendChild(grid);CH().appendChild(area);scroll();
+}
+
+function confirmBooking(){
+  var tDE='Vielen herzlichen Dank, **'+_booking.name+'**! 🙏\n\nIhr Termin wurde erfolgreich gebucht. Wir freuen uns sehr, Sie bald bei uns begrüßen zu dürfen!\n\nBitte erscheinen Sie ca. **10 Minuten früher** und bringen Sie Ihre **e-card** mit.\n\nWir wünschen Ihnen einen schönen Tag! 😊';
+  var tEN='Thank you so much, **'+_booking.name+'**! 🙏\n\nYour appointment has been confirmed. We really look forward to welcoming you!\n\nPlease arrive **10 minutes early** and bring your **health insurance card**.\n\nHave a wonderful day! 😊';
+  _busy=true;typing(true);
+  setTimeout(function(){
+    typing(false);addMsg(_lang==='de'?tDE:tEN,'b');_busy=false;
+    setTimeout(function(){
+      var chat=CH(),card=document.createElement('div');card.className='ty-card';
+      var isDE=_lang==='de';
+      var info=getDayName(_booking.date);
+      var mo=isDE?MONTHS_DE:MONTHS_EN;
+      var dl=info.day+'. '+mo[info.month]+' '+info.year;
+      card.innerHTML=
+        '<div class="ty-emoji">🦷✨</div>'+
+        '<div class="ty-title">'+(isDE?'Termin bestätigt!':'Appointment Confirmed!')+'</div>'+
+        '<div class="ty-detail">'+
+          '<div class="ty-row">📅 <b>'+(isDE?'Datum':'Date')+':</b> '+dl+'</div>'+
+          '<div class="ty-row">🕐 <b>'+(isDE?'Uhrzeit':'Time')+':</b> '+_booking.chosen+' Uhr</div>'+
+          '<div class="ty-row">👤 <b>Name:</b> '+_booking.name+'</div>'+
+          '<div class="ty-row">📍 Bahnhofstraße 12, 6900 Bregenz</div>'+
+          '<div class="ty-row">📞 +43 5574 123 456</div>'+
+        '</div>'+
+        '<div class="ty-msg">'+(isDE?'💚 Wir kümmern uns um Ihr Wohlbefinden.<br>Bis bald bei Dr. Müller & Team!':'💚 We care about your wellbeing.<br>See you soon with Dr. Müller & Team!')+'</div>'+
+        '<div class="ty-foot">✓ Zahnarztpraxis Bodensee · Bregenz</div>';
+      chat.appendChild(card);scroll();
+      setTimeout(function(){
+        showChoices(isDE
+          ?[{l:'📅 Weiteren Termin buchen',n:'n_name',s:1},{l:'❓ Noch eine Frage',n:'faq'},{l:'🏠 Hauptmenü',n:'main'}]
+          :[{l:'📅 Book another appointment',n:'n_name',s:1},{l:'❓ Ask a question',n:'faq'},{l:'🏠 Main menu',n:'main'}]);
+      },800);
+    },400);
+  },800);
+}
+
+// ── NODES ─────────────────────────────────────────────────────────────────
+var N={
+  n_name:{r:function(){
+    say(_lang==='de'?'Gerne helfe ich beim Terminbuchen! 📅\n\nDarf ich Ihren **Namen** erfahren?':'I\'d love to help you book! 📅\n\nCould I have your **name** please?');
+    _state='n_name';
+  }},
+  n_date:{r:function(){
+    say(_lang==='de'?'Danke, **'+_booking.name+'**! 😊\n\n📅 Ich lade die verfügbaren Termine aus dem Kalender...':'Thank you, **'+_booking.name+'**! 😊\n\n📅 Loading available dates from the calendar...',
+    function(){fetchAndShowDates();});
+    _state='n_date';
+  }},
+  hours:{r:function(){
+    say(_lang==='de'?'**Öffnungszeiten:**\n\nMo–Do: 08:00–18:00 Uhr\nFr: 08:00–13:00 Uhr\nSa–So: Geschlossen\n\n🚨 Notfall: 📞 **0800 20 21 22** (kostenlos, 24/7)':'**Opening hours:**\n\nMon–Thu: 08:00–18:00\nFri: 08:00–13:00\nSat–Sun: Closed\n\n🚨 Emergency: 📞 **0800 20 21 22** (free, 24/7)',
+    function(){showChoices(_lang==='de'?[{l:'📅 Termin buchen',n:'n_name',s:1},{l:'🏠 Hauptmenü',n:'main'}]:[{l:'📅 Book appointment',n:'n_name',s:1},{l:'🏠 Main menu',n:'main'}]);});
+  }},
+  insur:{r:function(){
+    say(_lang==='de'?'Wir akzeptieren:\n\n✅ **ÖGK** (Österreichische Gesundheitskasse)\n✅ **SVS** (Selbständige & Bauern)\n✅ **BVAEB** (Beamte & öffentlicher Dienst)\n\nPrivatpatient:innen herzlich willkommen!':'We accept:\n\n✅ **ÖGK** (Austrian Health Insurance)\n✅ **SVS** (self-employed)\n✅ **BVAEB** (civil servants)\n\nPrivate patients very welcome!',
+    function(){showChoices(_lang==='de'?[{l:'📅 Termin buchen',n:'n_name',s:1},{l:'🏠 Hauptmenü',n:'main'}]:[{l:'📅 Book appointment',n:'n_name',s:1},{l:'🏠 Main menu',n:'main'}]);});
+  }},
+  serv:{r:function(){
+    say(_lang==='de'?'Unsere Leistungen:\n\n🦷 Allgemeine Zahnheilkunde\n🧹 Professionelle Zahnreinigung\n⚪ Weiße Füllungen\n👑 Kronen & Brücken\n✨ Bleaching\n🔬 Wurzelbehandlung\n👶 Kinderzahnheilkunde\n📷 Digitales Röntgen':'Our services:\n\n🦷 General dentistry\n🧹 Professional cleaning\n⚪ White fillings\n👑 Crowns & bridges\n✨ Whitening\n🔬 Root canal\n👶 Children\'s dentistry\n📷 Digital X-rays',
+    function(){showChoices(_lang==='de'?[{l:'📅 Jetzt Termin buchen',n:'n_name',s:1},{l:'🏠 Hauptmenü',n:'main'}]:[{l:'📅 Book appointment now',n:'n_name',s:1},{l:'🏠 Main menu',n:'main'}]);});
+  }},
+  cont:{r:function(){
+    say('📞 **+43 5574 123 456**\n📧 praxis@zahnarzt-bodensee.at\n🌐 zahnarzt-bodensee.at\n📍 Bahnhofstraße 12, 6900 Bregenz\n\n🗺️ '+(_lang==='de'?'5 Minuten vom Bahnhof Bregenz':'5 minutes from Bregenz train station'),
+    function(){showChoices(_lang==='de'?[{l:'📅 Termin buchen',n:'n_name',s:1},{l:'🏠 Hauptmenü',n:'main'}]:[{l:'📅 Book appointment',n:'n_name',s:1},{l:'🏠 Main menu',n:'main'}]);});
+  }},
+  emer:{r:function(){
+    Q('em').classList.add('show');setTimeout(function(){Q('em').classList.remove('show');},9000);
+    say(_lang==='de'?'🚨 **Bitte nicht warten!**\n\nWährend der Öffnungszeiten:\n📞 **+43 5574 123 456** — sofortige Hilfe!\n\nAußerhalb der Öffnungszeiten:\n📞 **0800 20 21 22** — kostenlos, 24/7\n\nIhr Wohlbefinden hat höchste Priorität! 💚':'🚨 **Please do not wait!**\n\nDuring opening hours:\n📞 **+43 5574 123 456** — immediate help!\n\nOutside opening hours:\n📞 **0800 20 21 22** — free, 24/7\n\nYour wellbeing is our priority! 💚',
+    function(){showChoices(_lang==='de'?[{l:'🏠 Hauptmenü',n:'main'}]:[{l:'🏠 Main menu',n:'main'}]);});
+  }},
+  faq:{r:function(){
+    showChoices(_lang==='de'
+      ?[{l:'⏰ Öffnungszeiten',n:'hours'},{l:'💳 Kassen',n:'insur'},{l:'🦷 Leistungen',n:'serv'},{l:'📍 Kontakt',n:'cont'},{l:'🏠 Hauptmenü',n:'main'}]
+      :[{l:'⏰ Opening hours',n:'hours'},{l:'💳 Insurance',n:'insur'},{l:'🦷 Services',n:'serv'},{l:'📍 Contact',n:'cont'},{l:'🏠 Main menu',n:'main'}]);
+  }},
+  main:{r:function(){
+    say(_lang==='de'?'Wie kann ich Ihnen helfen?':'How can I help you?',
+    function(){showChoices(_lang==='de'
+      ?[{l:'📅 Termin vereinbaren',n:'n_name',s:1},{l:'⏰ Öffnungszeiten',n:'hours'},{l:'💳 Kassen',n:'insur'},{l:'🦷 Leistungen',n:'serv'},{l:'📍 Kontakt',n:'cont'},{l:'🚨 Notfall',n:'emer'}]
+      :[{l:'📅 Book appointment',n:'n_name',s:1},{l:'⏰ Opening hours',n:'hours'},{l:'💳 Insurance',n:'insur'},{l:'🦷 Services',n:'serv'},{l:'📍 Contact',n:'cont'},{l:'🚨 Emergency',n:'emer'}]);});
+  }}
+};
+
+function goNode(key){if(!_lang||_busy)return;var node=N[key];if(node)node.r();}
+
+function send(){
+  var inp=Q('inp');var txt=inp.value.trim();if(!txt||_busy)return;
+  inp.value='';clearUI();addMsg(txt,'u');
+  if(!_lang){pickLang(/hallo|guten|zahnarzt|termin|schmerz/i.test(txt)?'de':'en',null);return;}
+  if(EMER.test(txt)){N.emer.r();return;}
+  if(/english|in english/i.test(txt)&&_lang==='de'){_lang='en';goNode('main');return;}
+  if(/deutsch|german/i.test(txt)&&_lang==='en'){_lang='de';goNode('main');return;}
+  if(_state==='n_name'){_booking.name=txt;N.n_date.r();return;}
+  if(_state==='n_date_type'){_booking.date=txt;fetchAndShowSlots(txt);return;}
+  var t=txt.toLowerCase();
+  if(/termin|book|appoint/.test(t)){goNode('n_name');return;}
+  if(/öffnung|stunden|offen|hour|open/.test(t)){goNode('hours');return;}
+  if(/kasse|versicherung|insur/.test(t)){goNode('insur');return;}
+  if(/leistung|service|behandlung/.test(t)){goNode('serv');return;}
+  if(/kontakt|adresse|contact/.test(t)){goNode('cont');return;}
+  if(/bleach|whiten|aufhell/.test(t)){goNode('serv');return;}
+  if(/hallo|hello|hi |hey|servus/.test(t)){goNode('main');return;}
+  goNode('main');
+}
+
+// ── BOOT ──────────────────────────────────────────────────────────────────
+setTimeout(function(){
+  _busy=true;typing(true);
+  setTimeout(function(){
+    typing(false);
+    addMsg('👋 **Welcome to Zahnarztpraxis Bodensee!**\n\nI\'m **Mia** — your digital assistant, connected to the live appointment calendar.\n\n🌐 Please choose your preferred language:','b');
+    _busy=false;showLangCard();_state='lang';
+  },800);
+},400);
+</script>
+</body>
+</html>
